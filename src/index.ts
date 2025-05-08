@@ -1,14 +1,22 @@
 import express from 'express';
+import productsRoutes from './routes/products/index'
 const app = express();
 const port = 7000;
-app.get('/v1', (req, res) =>{
-    res.send({message:"Hello First Api"});
+
+app.get('/', (req, res) =>{
+    res.send({message:"Wellcome to API"});
 })
 
-app.post('/v1/user/create', (req, res) =>{
-    res.send({message:"User created successful"});
+app.use('/products', productsRoutes);
+
+app.listen(port, (err) =>{
+    if(!err){
+
+        console.log(`API is running on port: ${port}`);
+
+    }else{
+        console.log(`not connected ${err}` );
+    }
+    
 })
 
-app.listen(port, () =>{
-    console.log(`My api is running on port: ${port}`);
-})
