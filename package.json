@@ -2,11 +2,14 @@
   "name": "api",
   "version": "1.0.0",
   "main": "index.js",
-  "type" : "module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "node --import=tsx --watch --env-file=.env src/index.ts",
-    "build" : "tsc"
+    "dev": "node --import=tsx --watch --env-file=.env src/index.ts",
+    "build": "tsc",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate" : "drizzle-kit migrate",
+    "db:studio" : "drizzle-kit studio"
   },
   "keywords": [],
   "author": "",
@@ -14,8 +17,14 @@
   "description": "",
   "dependencies": {
     "@types/express": "^5.0.1",
+    "drizzle-orm": "^0.43.1",
     "express": "^5.1.0",
-    "tsx": "^4.19.4",
+    "pg": "^8.15.6",
     "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.1",
+    "drizzle-kit": "^0.31.1",
+    "tsx": "^4.19.4"
   }
 }
