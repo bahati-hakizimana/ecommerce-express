@@ -1,18 +1,35 @@
 import { Request, Response } from "express";
+import { db } from "../../db/index";
+import { productsTable } from "../../db/productSchema";
 
-export function listProducts(req: Request, res: Response) {
-  res.send({ message: "All products" });
+
+
+export async function createProduct(req:Request, res:Response){
+  try{
+    const [product] = await db.insert(productsTable).values(req.body).returning();
+    res.status(201).json(product);
+  }catch(err){
+    res.status(500).send(err);
+  }
 }
 
-export function getProductById(req: Request, res: Response) {
-  console.log(req.params);
-  res.send({ message: "Get product by it's id" });
+export async function listProducts(req:Request, res:Response){
+  try{
+    const products = await db.select().from(productsTable);
+    res.json(products);
+  }catch(err){
+    res.status(500).send(err);
+  }
 }
+export async function getProductById(req:Request, res:Response){
+  try{
+    const product = await db.select()
+  }catch(err){
 
-export function createProduct(req: Request, res: Response) {
+    res.status(404).send(err)
 
-  console.log(req.body);
-  res.send({ message: "Product added successful" });
+
+  }
 }
 
 export function updateProduct(req: Request, res: Response) {
